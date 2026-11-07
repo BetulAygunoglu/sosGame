@@ -1,97 +1,178 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# SOS Game – React Native
+
+A simple SOS board game developed with **React Native and TypeScript**, featuring AI agents powered by the **Minimax algorithm with Alpha-Beta Pruning** and heuristic evaluation functions.
+
+The project explores how different heuristic strategies affect AI decision-making in a turn-based game.
+
+## Game Modes
+
+The game offers three different modes:
+
+- **Single Player (Human vs AI):** Play against an AI agent. Switch between two heuristic functions (H1 and H2) to change the AI's strategy.
+- **Multiplayer (Human vs Human):** Play against another human player on the same device.
+- **AI vs AI:** Watch two AI agents compete against each other. The first agent uses H1, while the second uses H2.
+
+## Board Sizes
+
+Choose between three board sizes:
+
+- 3x3
+- 4x4
+- 5x5
+
+## How to Play
+
+SOS is a turn-based board game where players take turns selecting an empty cell and placing either **S** or **O**.
+
+- A player earns one point for every SOS sequence formed.
+- SOS sequences can be created horizontally, vertically, or diagonally.
+- Multiple SOS sequences can be formed with a single move, earning multiple points.
+- The game ends when all cells are filled.
+- The player with the highest score wins. Equal scores result in a draw.
+
+## AI Implementation
+
+The AI agents use the **Minimax algorithm with Alpha-Beta Pruning** to evaluate possible moves and select the most promising one.
+
+Two heuristic evaluation functions are implemented:
+
+- **H1 – Score-Based Heuristic:** Evaluates a game state based on the difference between the AI's score and the opponent's score.
+
+- **H2 – Strategic Heuristic:** Uses the score difference as its primary evaluation factor and additionally rewards placing the letter **S** in corners and edges of the board.
+
+In AI vs AI mode, both heuristic strategies compete against each other, allowing their decision-making approaches to be compared.
+
+The search depth is dynamically adjusted in AI vs AI mode depending on the number of empty cells remaining on the board.
+
+## Technologies Used
+
+- React Native
+- TypeScript
+- Redux
+- React Navigation
+- i18next (English and Turkish language support)
+- Minimax Algorithm
+- Alpha-Beta Pruning
+- Heuristic Evaluation Functions
+
+## Features
+
+- Three game modes
+- Three selectable board sizes
+- Two interchangeable AI heuristic strategies
+- AI vs AI gameplay
+- Automatic SOS detection in all directions
+- Score tracking and winner determination
+- English and Turkish language support
+- Game restart and main menu navigation
+
+---
 
 # Getting Started
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+Follow these instructions to set up and run the project locally.
 
-## Step 1: Start Metro
+## Prerequisites
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+Before running the project, make sure you have installed:
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+- [Node.js](https://nodejs.org/)
+- npm (included with Node.js) or Yarn
+- [React Native development environment](https://reactnative.dev/docs/set-up-your-environment)
+- Android Studio and an Android Emulator (for Android)
+- Xcode and CocoaPods (for iOS, macOS only)
 
-```sh
-# Using npm
+## Installation
+
+**1. Clone the repository**
+
+```bash
+git clone https://github.com/BetulAygunoglu/sosGame.git
+```
+
+**2. Navigate to the project directory**
+
+```bash
+cd sosGame
+```
+
+**3. Install dependencies**
+
+Using npm:
+
+```bash
+npm install
+```
+
+Or using Yarn:
+
+```bash
+yarn install
+```
+
+## Running the Application
+
+**1. Start Metro**
+
+Open a terminal in the project root and run:
+
+```bash
 npm start
+```
 
-# OR using Yarn
+Or:
+
+```bash
 yarn start
 ```
 
-## Step 2: Build and run your app
+**2. Run on Android**
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+Open another terminal in the project root and execute:
 
-### Android
-
-```sh
-# Using npm
+```bash
 npm run android
+```
 
-# OR using Yarn
+Or:
+
+```bash
 yarn android
 ```
 
-### iOS
+**3. Run on iOS**
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+First, install the CocoaPods dependencies:
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
+```bash
+cd ios
 bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
 bundle exec pod install
+cd ..
 ```
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+Then run:
 
-```sh
-# Using npm
+```bash
 npm run ios
+```
 
-# OR using Yarn
+Or:
+
+```bash
 yarn ios
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+Make sure Metro is running before launching the application.
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+## Troubleshooting
 
-## Step 3: Modify your app
+If you encounter any problems during installation or execution, check the official [React Native Troubleshooting Guide](https://reactnative.dev/docs/troubleshooting).
 
-Now that you have successfully run the app, let's make changes!
+---
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+## Project Purpose
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+The main purpose of this project is to implement and explore **AI decision-making using the Minimax algorithm and heuristic evaluation functions** in a simple board game environment.
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+By comparing two different heuristic strategies, the project demonstrates how evaluation functions can influence an AI agent's decisions and gameplay performance.
