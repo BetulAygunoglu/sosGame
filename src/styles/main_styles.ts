@@ -109,12 +109,16 @@ const styles = StyleSheet.create({
     textAlign: "left",
   },
   scoreContainer: {
-    width: "100%",
+    //width: "70%",
     alignItems: "flex-start",
     justifyContent: "center",
-    marginTop: 20,
-    marginBottom: 20,
-    paddingHorizontal: 20
+    paddingHorizontal: 20,
+    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: "#FFFFFF",
+    paddingVertical: 5,
+    alignSelf: "flex-start",
+    marginLeft: 20
   },
   eogModalCont: {
     alignItems: "center",
@@ -149,6 +153,23 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 40,
     right: 20
+  },
+  boardSizeBtn: {
+    //borderColor: "#FFFFFF",
+    //borderWidth: 3,
+    borderRadius: 15,
+    padding: 3,
+    paddingHorizontal: 10,
+    backgroundColor: "#F5F5F5",
+    borderColor: "#07199C",
+    borderWidth: 2,
+    alignItems: "center",
+  },
+  blueText: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#07199C",
+    textAlign: "center",
   }
 });
 

@@ -10,6 +10,7 @@ import EndOfGameModal from './EndOfGameModal';
 import { reset } from '../../utils/navigationMethod';
 import BoardSizeModal from './BoardSizeModal';
 import Ionicons from "@react-native-vector-icons/ionicons";
+import { useTranslation } from 'react-i18next';
 
 type GameProps = RouteProp<RootStackParamList, 'GamePage'>;
 
@@ -20,6 +21,7 @@ type Props = {
 const GamePage: React.FC<Props> = ({ route }) => {
 
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const { playerMode } = route.params;
   const [boardSize, setBoardSize] = useState<number>(3); //3x3, 4x4 5x5
@@ -388,22 +390,23 @@ const GamePage: React.FC<Props> = ({ route }) => {
       <ImageBackground source={require('../../assets/images/background_image.jpg')}
         style={mainStyles.imageStyle}>
 
-        <View style={{ ...mainStyles.boardSizeTxt, flexDirection: 'row', gap: 15 }}>
+        <View style={{ ...mainStyles.boardSizeTxt, gap: 15 }}>
+          <TouchableOpacity onPress={() => setOpenBoardSizeModal(true)} style= {mainStyles.boardSizeBtn}>
+            <Text style={{ ...mainStyles.scoreText, color: "#07199C" }}>{/* t('boardSize') + ": " */ + boardSize + "x" + boardSize}</Text>
+          </TouchableOpacity>
           {playerMode === 0 && (
-            <TouchableOpacity onPress={() => setAiHeuristic(aiHeuristic === 1 ? 2 : 1)}>
-              <Text style={{ ...mainStyles.scoreText, color: "#FFD700" }}>{`AI: H${aiHeuristic}`}</Text>
+            <TouchableOpacity onPress={() => setAiHeuristic(aiHeuristic === 1 ? 2 : 1)} style= {{...mainStyles.boardSizeBtn, backgroundColor: "#FFF5CC",}}>
+              <Text style={{ ...mainStyles.scoreText, color: "#07199C" }}>{`AI: H${aiHeuristic}`}</Text>
             </TouchableOpacity>
           )}
-          <TouchableOpacity onPress={() => setOpenBoardSizeModal(true)}>
-            <Text style={{ ...mainStyles.scoreText, color: "#FFFFFF" }}>{t('boardSize') + ": " + boardSize + "x" + boardSize}</Text>
-          </TouchableOpacity>
         </View>
 
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
 
-          <View style={mainStyles.scoreContainer}>
-            <Text style={{ ...mainStyles.scoreText, color: "#FFFFFF" }}>{playerMode === 0 ? t('sen') : playerMode === 2 ? "AI 1 (H1)" : t('player1')} {": " + player1sos}</Text>
-          </View>
+          {gameStarted &&
+            <View style={{...mainStyles.scoreContainer, top: 50}}>
+              <Text style={{ ...mainStyles.scoreText, color: "#FFFFFF" }}>{playerMode === 0 ? t('sen') : playerMode === 2 ? "AI 1 (H1)" : t('player1')} {": " + player1sos}</Text>
+            </View>}
 
           {gameStarted && (
             <View style={{ alignItems: 'center', gap: 10, marginVertical: 100 }}>
@@ -426,19 +429,22 @@ const GamePage: React.FC<Props> = ({ route }) => {
             )}
 
           {gameStarted && (
-            <View style={{ alignItems: 'center', gap: 10, marginVertical: 100 }}>
-              {activeTurn ? (
-                <>
-                  <Ionicons name={"caret-up"} color="#FFFFFF" size={60} />
-                  <Text style={{ ...mainStyles.playerTxt, ...(activeTurn && { color: "#FFFFFF" }) }}>{playerMode === 0 ? t('sosGuru') : playerMode === 2 ? "AI 2 (H2)" : t('player2')}</Text>
-                </>
-              ) : null}
-            </View>
+            <>
+              <View style={{ alignItems: 'center', gap: 10, marginVertical: 100 }}>
+                {activeTurn ? (
+                  <>
+                    <Ionicons name={"caret-up"} color="#FFFFFF" size={60} />
+                    <Text style={{ ...mainStyles.playerTxt, ...(activeTurn && { color: "#FFFFFF" }) }}>{playerMode === 0 ? t('sosGuru') : playerMode === 2 ? "AI 2 (H2)" : t('player2')}</Text>
+                  </>
+                ) : null}
+              </View>
+
+              <View style={{...mainStyles.scoreContainer, bottom: 50}}>
+                <Text style={{ ...mainStyles.scoreText, color: "#FFFFFF" }}>{playerMode === 0 ? t('sosGuru') : playerMode === 2 ? "AI 2 (H2)" : t('player2')} {": " + player2sos}</Text>
+              </View>
+            </>
           )}
 
-          <View style={mainStyles.scoreContainer}>
-            <Text style={{ ...mainStyles.scoreText, color: "#FFFFFF" }}>{playerMode === 0 ? t('sosGuru') : playerMode === 2 ? "AI 2 (H2)" : t('player2')} {": " + player2sos}</Text>
-          </View>
 
           <SelectionModal
             visible={showSelectionModal}

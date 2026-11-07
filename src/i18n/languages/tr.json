@@ -36,5 +36,6 @@
     "ai_wins": "Yapay Zeka Kazandı!",
     "final_score": "Final Skor",
     "back_to_main": "Ana Menüye Dön",
-    "play_again": "Tekrar Oyna"
+    "play_again": "Tekrar Oyna",
+    "setBoardSize": "Tahta Boyutu Seçin"
 }

@@ -36,5 +36,6 @@
     "ai_wins": "AI Wins!",
     "final_score": "Final Score",
     "back_to_main": "Main Menu",
-    "play_again": "Play Again"
+    "play_again": "Play Again",
+    "setBoardSize": "Set Board Size"
 }

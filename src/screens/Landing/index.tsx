@@ -7,10 +7,13 @@ import { setLanguage } from '../../redux/slices/languageSlice';
 import mainStyles from '../../styles/main_styles';
 import { t } from 'i18next';
 import { navigate } from '../../utils/navigationMethod';
+import { useTranslation } from 'react-i18next';
 
 const LandingPage = () => {
 
   const dispatch = useDispatch();
+  
+  const { t } = useTranslation();
 
   const apiClient = ApiClient.getInstance();
 
@@ -46,6 +49,10 @@ const LandingPage = () => {
     <View style={{ flex: 1 }}>
       <ImageBackground source={require('../../assets/images/background_image.jpg')}
         style={mainStyles.imageStyle}>
+          <TouchableOpacity onPress={() => changeLang(i18n.language === 'en' ? 'tr' : 'en')}
+            style={{ position: 'absolute', top: 50, right: 20, backgroundColor: "#FFF5CC", paddingHorizontal: 10, paddingVertical: 5, borderRadius: 10 }}>
+            <Text style={{ color: "#07199C", fontWeight: "bold" }}>{i18n.language === 'en' ? 'TR' : 'EN'}</Text>
+          </TouchableOpacity>
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
           <Text style={mainStyles.bigHeader}>{t('sos')}</Text>
 
